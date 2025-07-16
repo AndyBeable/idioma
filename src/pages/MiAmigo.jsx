@@ -16,13 +16,30 @@ function MiAmigo() {
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState(initialMessages)
 
-  const handleSendMessage = () => {
-    console.log('hello')
-    if(input.trim() === '') return
-
-    setMessages([...messages, { role: 'user', message: input }])
+  const handleSendMessage = async () => {
+    if (input.trim() === '') return
+  
+    const newMessages = [...messages, { role: 'user', message: input }]
+    setMessages(newMessages)
     setInput('')
+  
+    try {
+      const res = await fetch('http://localhost:3000/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ messages: newMessages }),
+      })
+  
+      const data = await res.json()
+  
+      setMessages([...newMessages, { role: 'assistant', message: data.reply }])
+    } catch (error) {
+      console.error('Error talking to server:', error)
+    }
   }
+  
 
   return (
     <>
