@@ -18,7 +18,7 @@ function MiAmigo() {
 
   const handleSendMessage = async () => {
     if (input.trim() === '') return
-  
+  // testing
     const newMessages = [...messages, { role: 'user', message: input }]
     setMessages(newMessages)
     setInput('')
