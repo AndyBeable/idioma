@@ -28,11 +28,11 @@ app.post('/chat', async (req, res) => {
 
     const systemMessage = {
       role: 'system',
-      content: 'You are a professional Spanish tutor. Correct every mistake the user makes and provide grammar explanations.'
+      content: 'You are a professional Spanish tutor. You should correct mistakes but not too strict. You should be friendly, encouraging and engaging.'
     }
 
     const chatCompletion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: 'o4-mini-2025-04-16',
       messages: [systemMessage, ...messages.map(msg => ({
         role: msg.role,
         content: msg.message,
