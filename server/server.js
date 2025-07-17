@@ -24,14 +24,19 @@ app.get('/', (req, res) => {
 
 app.post('/chat', async (req, res) => {
   try {
-    const { messages } = req.body // expecting an array of { role, message }
+    const { messages } = req.body
+
+    const systemMessage = {
+      role: 'system',
+      content: 'You are a professional Spanish tutor. Correct every mistake the user makes and provide grammar explanations.'
+    }
 
     const chatCompletion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: messages.map(msg => ({
+      model: 'gpt-3.5-turbo',
+      messages: [systemMessage, ...messages.map(msg => ({
         role: msg.role,
         content: msg.message,
-      })),
+      }))],
     })
 
     const reply = chatCompletion.choices[0].message.content
@@ -42,6 +47,7 @@ app.post('/chat', async (req, res) => {
     res.status(500).json({ error: 'Something went wrong' })
   }
 })
+
 
 
 // Start server on port 3000
