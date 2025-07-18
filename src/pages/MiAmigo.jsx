@@ -31,32 +31,6 @@ function MiAmigo() {
       });
   };
 
-  const handleMessagesWithAPI = async () => {
-    if (input.trim() === "") return;
-    const newMessages = [...messages, { role: "user", message: input }];
-    setMessages(newMessages);
-    setInput("");
-
-    try {
-      setIsLoading(true);
-      const res = await fetch("http://localhost:3000/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ messages: newMessages }),
-      });
-
-      const data = await res.json();
-
-      setMessages([...newMessages, { role: "assistant", message: data.reply }]);
-    } catch (error) {
-      console.error("Error talking to server:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <>
       <Button

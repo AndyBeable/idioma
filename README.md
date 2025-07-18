@@ -1,54 +1,59 @@
-# Idioma
+# Idioma 🇪🇸🤖
 
-**Idioma** is a practice project that helps users learn Spanish through conversation with an AI-powered language partner, "Mi Amigo." Built with React and Express, it uses the OpenAI API to generate interactive Spanish-language responses in real-time.
+**Idioma** is a language learning app built with React and OpenAI. It allows users to practice Spanish through conversation with an AI assistant and interactive flashcards.
+
+> Built as a practice project to learn React fundamentals, environment management, and working with OpenAI's API.
 
 ---
 
 ## ✨ Features
 
-- 🎯 Chat-based interface for practicing Spanish
-- 🧠 AI-powered responses using OpenAI (GPT-3.5)
-- 💬 Real-time user input and message display
-- 🌐 Express backend to handle OpenAI communication
-- 🎨 Styled with Tailwind CSS
+- 💬 **AI Spanish Tutor** — Chat with a friendly AI that replies in Spanish with English translations.
+- 🧠 **Flashcards** — Reinforce learning with interactive flashcards (WIP or existing).
+- 🎨 Sleek UI with Tailwind CSS + Framer Motion animations.
+- ☁️ Deployed via **Vercel**.
 
 ---
 
-## 🛠 Tech Stack
+## 📸 Screenshots
 
-- **Frontend:** React (Vite), Tailwind CSS
-- **Backend:** Express.js
-- **AI:** OpenAI API (`gpt-3.5-turbo`)
-- **Other:** CORS, dotenv
+_You can add screenshots here later if you'd like. For now, skip this section or add placeholders._
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Live Demo
 
-### 1. Clone the repository
+🔗 [https://idioma-omega.vercel.app](https://idioma-omega.vercel.app)
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React (Vite), Tailwind CSS, Framer Motion
+- **AI Integration**: OpenAI GPT (via `openai` npm package)
+- **Hosting**: Vercel
+- **Env Management**: `.env` with Vite prefix (`VITE_`)
+
+---
+
+## 🔧 Getting Started
+
+### 1. Clone the repo
 
 git clone https://github.com/your-username/idioma.git
 cd idioma
 
----
-
-### 2. Install client dependencies
-cd client
+### 2. Install dependencies
 npm install
 
----
+### 3. Add environment variables
+Create .env file in project root and add your OpenAI key
+VITE_OPENAI_API_KEY=your_openai_key_here
 
-### 3. Install server dependencies
-cd ../server
-npm install
-
----
-
-## 💻 Running the App
-### Start backend (Express)
-cd server
-node server.js
-
-### Start frontend (React)
-cd ../client
+### 4. Run locally
 npm run dev
+
+## 🤖 OpenAI Prompt Behavior
+The assistant is configured with this system prompt:
+
+"You are a professional Spanish tutor. You should correct mistakes but not too strict. You should be friendly, encouraging and engaging. Your response should be in Spanish with English translation in brackets."
