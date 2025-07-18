@@ -7,7 +7,7 @@ function Home() {
     <motion.div className="" inital={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} transition={{duration: 0.3}}>
       <h1 className="text-center text-4xl font-bold text-white mt-4 mb-2">IDIOMA</h1>
       <p className="text-center text-white text-lg mb-8">Learn languages with flashcards</p>
-      <div className="flex justify-between">
+      <div className="flex justify-between flex-col md:flex-row">
 
       <Tile to="/flashcards">
         <h1 className="text-2xl font-bold">Learn with Flashcards</h1>
