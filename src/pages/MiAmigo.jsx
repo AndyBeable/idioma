@@ -13,7 +13,22 @@ function MiAmigo() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState(initialMessages);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const bottomRef = useRef(null);
+
+  useEffect(() => {
+    const savedMessages = localStorage.getItem("miAmigoMessages")
+    if (savedMessages) {
+      setMessages(JSON.parse(savedMessages))
+    }
+    setIsInitialLoad(false);
+  }, [])
+  
+  useEffect(() => {
+    if (!isInitialLoad) {
+      localStorage.setItem("miAmigoMessages", JSON.stringify(messages));
+    }
+  }, [messages, isInitialLoad]);
 
   const handleSendMessage = async () => {
     if (input.trim() === "") return;
@@ -27,9 +42,13 @@ function MiAmigo() {
         setIsLoading(false);
       })
       .catch((error) => {
-        // console.error('Error from OpenAI:', error.message)
         console.log("Error from OpenAI:", error);
       });
+  };
+
+  const handleClearHistory = () => {
+    localStorage.removeItem("miAmigoMessages");
+    setMessages(initialMessages);
   };
 
   useEffect(() => {
@@ -37,6 +56,8 @@ function MiAmigo() {
       bottomRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages.length, isLoading]);
+
+  
 
   return (
     <>
@@ -53,7 +74,12 @@ function MiAmigo() {
         </p>
 
         {/* Chat History */}
-        <div className="flex-grow overflow-y-auto border-2 border-yellow-500 rounded-md p-4 w-full max-w-[500px] mb-4 bg-white/5 text-white">
+        <div className="flex-grow overflow-y-auto border-2 border-yellow-500 rounded-md p-4 w-full max-w-[500px] mb-4 bg-white/5 text-white relative">
+        {messages.length > 1 && (
+          <button className="absolute top-4 right-4 text-white text-sm cursor-pointer" onClick={handleClearHistory}>X Clear History</button>
+        )}
+
+          {/* Chat History */}
           {messages.map((message, index) => {
             const isUser = message.role === "user";
 
