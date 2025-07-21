@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Button from "../components/Button";
 import askQuestion from "../services/chat";
 
@@ -13,6 +13,7 @@ function MiAmigo() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState(initialMessages);
+  const bottomRef = useRef(null);
 
   const handleSendMessage = async () => {
     if (input.trim() === "") return;
@@ -30,6 +31,12 @@ function MiAmigo() {
         console.log("Error from OpenAI:", error);
       });
   };
+
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages.length, isLoading]);
 
   return (
     <>
@@ -84,6 +91,7 @@ function MiAmigo() {
               </div>
             </div>
           )}
+          <div ref={bottomRef} />
         </div>
 
         {/* Input Box */}
