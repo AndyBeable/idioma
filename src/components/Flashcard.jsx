@@ -8,6 +8,7 @@ function Flashcard({
   isInteractive,
   currentIndex,
   totalCards,
+  studyMode,
 }) {
   const [userAnswer, setUserAnswer] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
@@ -41,36 +42,53 @@ function Flashcard({
         <p className="text-lg mb-4">{flashcard.answer}</p>
       )}
       <div className="flex items-center justify-center">
-        {showFeedback ? (
-          // Show feedback
-          <div className="text-center">
-            <p className={`text-lg font-bold mb-2 ${isCorrect ? 'text-green-300' : 'text-red-300'}`}>
-              {isCorrect ? '✅ Correct!' : '❌ Incorrect'}
-            </p>
-            <p className="text-sm mb-4">Correct answer: {flashcard.answer}</p>
-            <button 
-              onClick={handleNextCard}
-              className="bg-white text-black px-4 py-2 rounded-lg"
-            >
-              Next Card
-            </button>
-          </div>
-        ) : (
-          // Show input
-          <input 
-            type="text" 
-            value={userAnswer} 
-            onChange={(e) => setUserAnswer(e.target.value)} 
-            placeholder="Enter your answer" 
-            className="bg-white text-black px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" 
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleSubmitAnswer()
-              }
-            }}
-          />
-        )}
+  {studyMode === 'type' ? (
+    // Type mode
+    showFeedback ? (
+      // Show feedback
+      <div className="text-center">
+        <p className={`text-lg font-bold mb-2 ${isCorrect ? 'text-green-300' : 'text-red-300'}`}>
+          {isCorrect ? '✅ Correct!' : '❌ Incorrect'}
+        </p>
+        <p className="text-sm mb-4">Correct answer: {flashcard.answer}</p>
+        <button 
+          onClick={handleNextCard}
+          className="bg-white text-black px-4 py-2 rounded-lg"
+        >
+          Next Card
+        </button>
       </div>
+    ) : (
+      // Show input
+      <input 
+        type="text" 
+        value={userAnswer} 
+        onChange={(e) => setUserAnswer(e.target.value)} 
+        placeholder="Enter your answer" 
+        className="bg-white text-black px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" 
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            handleSubmitAnswer()
+          }
+        }}
+      />
+    )
+  ) : (
+    // Reveal mode
+    isInteractive && (
+      <button
+        className="bg-white text-black px-4 py-2 rounded-lg"
+        onClick={
+          isAnswerVisible
+            ? handleNext
+            : () => setIsAnswerVisible(true)
+        }
+      >
+        {isAnswerVisible ? 'Next' : 'Reveal'}
+      </button>
+    )
+  )}
+</div>
     </div>
   )
 }

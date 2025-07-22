@@ -122,6 +122,7 @@ function Flashcards() {
                   isInteractive={isTopCard}
                   currentIndex={currentIndex}
                   totalCards={cardQueue.length}
+                  studyMode={studyMode}
                 />
               </div>
             )
