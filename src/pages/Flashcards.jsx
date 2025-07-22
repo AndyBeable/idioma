@@ -7,25 +7,25 @@ const defaultFlashcards = [
   {
     id: 1,
     question: 'How do you say Dog in Spanish?',
-    answer: 'Perro 🐶',
+    answer: 'Perro',
     colorClass: 'bg-gradient-to-br from-indigo-800 to-violet-900',
   },
   {
     id: 2,
     question: 'How do you say Cat in Spanish?',
-    answer: 'Gato 🐱',
+    answer: 'Gato',
     colorClass: 'bg-gradient-to-br from-yellow-600 to-yellow-400',
   },
   {
     id: 3,
     question: 'How do you say Bird in Spanish?',
-    answer: 'Pájaro 🐦',
+    answer: 'Pájaro',
     colorClass: 'bg-gradient-to-br from-rose-600 to-pink-500',
   },
   {
     id: 4,
     question: 'How do you say Apple in Spanish?',
-    answer: 'Manzana 🍎',
+    answer: 'Manzana',
     colorClass: 'bg-gradient-to-br from-green-600 to-lime-800',
   },
 ]

@@ -73,13 +73,10 @@ function MiAmigo() {
           Learn languages with your friend
         </p>
 
-        {/* Chat History */}
         <div className="flex-grow overflow-y-auto border-2 border-yellow-500 rounded-md p-4 w-full max-w-[500px] mb-4 bg-white/5 text-white relative">
         {messages.length > 1 && (
           <button className="absolute top-4 right-4 text-white text-sm cursor-pointer" onClick={handleClearHistory}>X Clear History</button>
         )}
-
-          {/* Chat History */}
           {messages.map((message, index) => {
             const isUser = message.role === "user";
 
@@ -119,8 +116,6 @@ function MiAmigo() {
           )}
           <div ref={bottomRef} />
         </div>
-
-        {/* Input Box */}
         <div className="flex items-center gap-4 w-full max-w-[500px]">
           <input
             value={input}
