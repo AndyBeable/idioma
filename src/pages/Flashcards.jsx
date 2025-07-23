@@ -61,15 +61,13 @@ function Flashcards() {
     })
   }
 
-  const currentFlashcard = cardQueue[0]
-
-  const currentIndex = flashcards.findIndex(card => card.id === currentFlashcard.id) + 1
+  const currentIndex = 1
 
   return (
     <div className="relative flex flex-col justify-center items-center h-screen">
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-white text-2xl font-bold mb-8">Test your knowledge</h1>
-        <p className="text-white text-lg mb-18">Learn languages and test yourself with flashcards</p>
+        <p className="text-white text-lg mb-8">Learn languages and test yourself with flashcards</p>
         <Button className="absolute top-10 left-10 bg-gray-700 hover:bg-gray-800 hover:border-b-2 hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" to="/">Back to Home</Button>
         <Button className="absolute top-10 right-10 bg-gray-700 hover:bg-gray-800 hover:border-b-2 hover:border-r-2 hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" onClick={() => setIsOpen(true)}>Add Flashcard</Button>
       </div>

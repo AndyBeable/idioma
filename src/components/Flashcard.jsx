@@ -15,8 +15,6 @@ function Flashcard({
   const [showFeedback, setShowFeedback] = useState(false)
 
   const handleSubmitAnswer = () => {
-    console.log(userAnswer)
-    console.log(flashcard.answer)
     if(userAnswer.trim() === '') return
     const correct = userAnswer.toLowerCase() === flashcard.answer.toLowerCase()
     setIsCorrect(correct)

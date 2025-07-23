@@ -9,3 +9,7 @@
 body {
   background-color: var(--primary-color);
 }
+
+button {
+  cursor: pointer;
+}

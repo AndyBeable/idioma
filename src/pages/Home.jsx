@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom'
 import Tile from '../components/Tile'
 import { motion } from 'framer-motion'
-import aiChat from '../assets/aiChat.svg'
-import flashcards from '../assets/flashcards.svg'
+import aiChat from '../assets/aiChat.png'
+import flashcards from '../assets/flashcards.png'
 
 function Home() {
   return (
@@ -13,14 +12,14 @@ function Home() {
 
       <Tile to="/flashcards">
         <h1 className="text-2xl font-bold">Learn with Flashcards</h1>
-        <p className="text-lg mb-4 md:mb-0">Learn languages with flashcards</p>
-        <img src={flashcards} alt="Learn with Flashcards" className='w-[300px] h-[100%]'/>
+        <p className="text-lg mb-4">Learn languages with flashcards</p>
+        <img src={flashcards} alt="Learn with Flashcards" className='w-[350px]'/>
         
       </Tile>
       <Tile to="/mi-amigo">
         <h1 className="text-2xl font-bold">Learn with AI</h1>
-        <p className="text-lg mb-4 md:mb-0">Learn languages with AI</p>
-        <img src={aiChat} alt="Learn with Flashcards" className='w-[300px] h-[100%]'/>
+        <p className="text-lg mb-4">Learn languages with AI</p>
+        <img src={aiChat} alt="Learn with Flashcards" className='w-[350px]'/>
       </Tile>
       </div>
     </motion.div>
