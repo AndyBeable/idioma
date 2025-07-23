@@ -62,13 +62,14 @@ function Flashcard({
         type="text" 
         value={userAnswer} 
         onChange={(e) => setUserAnswer(e.target.value)} 
-        placeholder="Enter your answer" 
-        className="bg-white text-black px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" 
+        placeholder="Type your answer here..."
+        className="bg-transparent text-white text-lg border-b-2 border-white/50 pb-1 outline-none placeholder:text-white/50 focus:border-white"
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
             handleSubmitAnswer()
           }
         }}
+        autoFocus
       />
     )
   ) : (
