@@ -26,7 +26,6 @@ const defaultQuizQuestions = [
 ]
 
 function Quiz() {
-  // Load quiz questions from localStorage or use defaults
   const loadQuizQuestions = () => {
     const saved = localStorage.getItem('quizQuestions')
     return saved ? JSON.parse(saved) : defaultQuizQuestions
@@ -34,14 +33,32 @@ function Quiz() {
 
   const [quizQuestions, setQuizQuestions] = useState(loadQuizQuestions)
   const [studyMode, setStudyMode] = useState('multi')
+  
+  useEffect(() => {
+    localStorage.setItem('quizQuestions', JSON.stringify(quizQuestions))
+  }, [quizQuestions])
+  
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const currentQuestion = quizQuestions[currentQuestionIndex]
 
-  // Save quiz questions to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem('quizQuestions', JSON.stringify(quizQuestions))
-  }, [quizQuestions])
+  const [selectedAnswer, setSelectedAnswer] = useState(null)
+  const [showFeedback, setShowFeedback] = useState(false)
+  const [isCorrect, setIsCorrect] = useState(null)
+
+  const handleAnswerClick = (selectedAnswer) => {
+    console.log(selectedAnswer)
+    if(selectedAnswer === currentQuestion.correctAnswer) {
+      setIsCorrect(true)
+    } else {
+      setIsCorrect(false)
+    }
+    setShowFeedback(true)
+    setSelectedAnswer(selectedAnswer)
+  }
+  
+
+
   
   return (
     <div className="relative flex flex-col h-screen">
@@ -90,8 +107,17 @@ function Quiz() {
           <div className="flex items-center justify-center gap-4">
             {currentQuestion.options.map((option, index) => (
               <button
+                onClick={() => handleAnswerClick(option)}
                 key={index}
-                className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors border-b-2 border-transparent hover:border-yellow-500 font-bold"
+                className={`px-4 py-2 rounded-lg transition-colors border-b-2 border-transparent font-bold ${
+                  showFeedback && selectedAnswer === option
+                    ? isCorrect 
+                      ? 'bg-green-600 text-white'
+                      : 'bg-red-600 text-white'   
+                    : showFeedback && option === currentQuestion.correctAnswer
+                      ? 'bg-green-600 text-white' 
+                      : 'bg-gray-900 text-white hover:bg-gray-800 hover:border-yellow-500'
+                }`} 
               >
                 {option}
               </button>
