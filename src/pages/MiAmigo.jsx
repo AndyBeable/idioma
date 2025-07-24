@@ -52,7 +52,7 @@ function MiAmigo() {
   };
 
   useEffect(() => {
-    if (bottomRef.current) {
+    if (bottomRef.current && messages.length > 1) {
       bottomRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages.length, isLoading]);

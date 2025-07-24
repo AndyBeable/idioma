@@ -65,7 +65,7 @@ function Flashcards() {
   const [cardQueue, setCardQueue] = useState(loadFlashcards)
   const [isAnswerVisible, setIsAnswerVisible] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
-  const [studyMode, setStudyMode] = useState('type')
+  const [studyMode, setStudyMode] = useState('reveal')
   const [currentCardNumber, setCurrentCardNumber] = useState(1)
 
   const currentIndex = currentCardNumber

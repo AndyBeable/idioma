@@ -1,6 +1,7 @@
 import Tile from '../components/Tile'
 import { motion } from 'framer-motion'
 import ai from '../assets/ai.png'
+import quiz from '../assets/quiz.png'
 import flashcards from '../assets/flashcards.png'
 
 function Home() {
@@ -20,6 +21,11 @@ function Home() {
         <h1 className="text-2xl font-bold">Learn with AI</h1>
         <p className="text-lg mb-4">Learn languages with AI</p>
         <img src={ai} alt="Learn with Flashcards" className='w-[350px]'/>
+      </Tile>
+      <Tile to="/quiz">
+        <h1 className="text-2xl font-bold">Learn with Quiz</h1>
+        <p className="text-lg mb-4">Learn languages with Quiz</p>
+        <img src={quiz} alt="Learn with Flashcards" className='w-[350px]'/>
       </Tile>
       </div>
     </motion.div>
