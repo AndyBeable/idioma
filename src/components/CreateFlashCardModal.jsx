@@ -6,10 +6,14 @@ function CreateFlashCardModal({ isOpen, setIsOpen, flashcards, setFlashcards }) 
   const [answer, setAnswer] = useState('')
 
   const colorClasses = [
-    'bg-gradient-to-br from-indigo-800 to-violet-900',
-    'bg-gradient-to-br from-yellow-600 to-yellow-400',
-    'bg-gradient-to-br from-rose-600 to-pink-500',
-    'bg-gradient-to-br from-green-600 to-lime-800'
+    'bg-green-600',
+    'bg-orange-100',
+    'bg-sky-500',
+    'bg-orange-100',
+    'bg-rose-600',
+    'bg-orange-500',
+    'bg-red-300',
+    'bg-amber-400',
   ]
 
   // Reset form when modal opens/closes

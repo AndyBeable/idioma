@@ -8,25 +8,49 @@ const defaultFlashcards = [
     id: 1,
     question: 'How do you say Dog in Spanish?',
     answer: 'Perro',
-    colorClass: 'bg-gradient-to-br from-indigo-800 to-violet-900',
+    colorClass: 'bg-green-600',
   },
   {
     id: 2,
     question: 'How do you say Cat in Spanish?',
     answer: 'Gato',
-    colorClass: 'bg-gradient-to-br from-yellow-600 to-yellow-400',
+    colorClass: 'bg-orange-100',
   },
   {
     id: 3,
     question: 'How do you say Bird in Spanish?',
     answer: 'Pájaro',
-    colorClass: 'bg-gradient-to-br from-rose-600 to-pink-500',
+    colorClass: 'bg-sky-500',
   },
   {
     id: 4,
     question: 'How do you say Apple in Spanish?',
     answer: 'Manzana',
-    colorClass: 'bg-gradient-to-br from-green-600 to-lime-800',
+    colorClass: 'bg-orange-100',
+  },
+  {
+    id: 5,
+    question: 'How do you say Hello in Spanish?',
+    answer: 'Hola',
+    colorClass: 'bg-rose-600',
+  },
+  {
+    id: 6,
+    question: 'How do you say How are you in Spanish?',
+    answer: '¿Cómo estás?',
+    colorClass: 'bg-orange-500',
+  },
+  {
+    id: 7,
+    question: 'How do you say How old are you in Spanish?',
+    answer: '¿Cuántos años tienes?',
+    colorClass: 'bg-red-300',
+  },
+  {
+    id: 8,
+    question: 'How do you say Goodbye in Spanish?',
+    answer: 'Adiós',
+    colorClass: 'bg-amber-400',
   },
 ]
 
@@ -42,6 +66,9 @@ function Flashcards() {
   const [isAnswerVisible, setIsAnswerVisible] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [studyMode, setStudyMode] = useState('type')
+  const [currentCardNumber, setCurrentCardNumber] = useState(1)
+
+  const currentIndex = currentCardNumber
 
   // Save flashcards to localStorage whenever they change
   useEffect(() => {
@@ -53,15 +80,17 @@ function Flashcards() {
   }, [flashcards])
   
   function handleNext() {
-
     setIsAnswerVisible(false)
+    setCurrentCardNumber(prev => prev + 1)
     setCardQueue((prevQueue) => {
       const [first, ...rest] = prevQueue
       return [...rest, first]
     })
   }
 
-  const currentIndex = 1
+
+  
+
 
   return (
     <div className="relative flex flex-col justify-center items-center h-screen">
