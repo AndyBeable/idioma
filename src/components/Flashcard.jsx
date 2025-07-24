@@ -76,7 +76,7 @@ function Flashcard({
     // Reveal mode
     isInteractive && (
       <button
-        className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+        className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors border-b-2 border-transparent hover:border-yellow-500 font-bold"
         onClick={
           isAnswerVisible
             ? handleNext

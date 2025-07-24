@@ -8,7 +8,7 @@ const defaultFlashcards = [
     id: 1,
     question: 'How do you say Dog in Spanish?',
     answer: 'Perro',
-    colorClass: 'bg-green-600',
+    colorClass: 'bg-sky-600',
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ const defaultFlashcards = [
     id: 3,
     question: 'How do you say Bird in Spanish?',
     answer: 'Pájaro',
-    colorClass: 'bg-sky-500',
+    colorClass: 'bg-green-600',
   },
   {
     id: 4,
@@ -93,36 +93,48 @@ function Flashcards() {
 
 
   return (
-    <div className="relative flex flex-col justify-center items-center h-screen">
-      <div className="flex flex-col justify-center items-center">
-        <h1 className="text-white text-2xl font-bold mb-8">Test your knowledge</h1>
-        <p className="text-white text-lg mb-8">Learn languages and test yourself with flashcards</p>
-        <Button className="absolute top-10 left-10 bg-gray-700 hover:bg-gray-800 hover:border-b-2 hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" to="/">Back to Home</Button>
-        <Button className="absolute top-10 right-10 bg-gray-700 hover:bg-gray-800 hover:border-b-2 hover:border-r-2 hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" onClick={() => setIsOpen(true)}>Add Flashcard</Button>
+    <div className="relative flex flex-col h-screen">
+      {/* Header */}
+      <div className="flex items-center justify-between p-6">
+        <Button className="bg-gray-700 hover:bg-gray-800 hover:border-b-2 hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" to="/">Back to Home</Button>
+        <h1 className="text-white text-2xl font-bold">Test your knowledge</h1>
+        <Button className="bg-gray-700 hover:bg-gray-800 hover:border-b-2 hover:border-r-2 hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" onClick={() => setIsOpen(true)}>Add Flashcard</Button>
       </div>
-      <div className="justify-center items-center flex bg-gray-700 rounded-lg p-1 mb-4">
-  <button
-    onClick={() => setStudyMode('reveal')}
-    className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-      studyMode === 'reveal'
-        ? 'bg-yellow-500 text-black'
-        : 'text-white hover:bg-gray-600'
-    }`}
-  >
-    Reveal Mode
-  </button>
-  <button
-    onClick={() => setStudyMode('type')}
-    className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-      studyMode === 'type'
-        ? 'bg-yellow-500 text-black'
-        : 'text-white hover:bg-gray-600'
-    }`}
-  >
-    Type Mode
-  </button>
-</div>
-      <div className="relative w-[400px] h-[300px] lg:w-[600px] lg:h-[400px]">
+      
+      {/* Description */}
+      <div className="text-center mb-8">
+        <p className="text-white text-lg">Learn languages and test yourself with flashcards</p>
+      </div>
+      
+      {/* Mode Selector */}
+      <div className="flex justify-center mb-8">
+        <div className="flex bg-gray-700 rounded-lg p-1">
+          <button
+            onClick={() => setStudyMode('reveal')}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              studyMode === 'reveal'
+                ? 'bg-yellow-500 text-black'
+                : 'text-white hover:bg-gray-600'
+            }`}
+          >
+            Reveal Mode
+          </button>
+          <button
+            onClick={() => setStudyMode('type')}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              studyMode === 'type'
+                ? 'bg-yellow-500 text-black'
+                : 'text-white hover:bg-gray-600'
+            }`}
+          >
+            Type Mode
+          </button>
+        </div>
+      </div>
+      
+      {/* Flashcards */}
+      <div className="flex-1 flex items-center justify-center">
+        <div className="relative w-[400px] h-[300px] lg:w-[600px] lg:h-[400px]">
         {cardQueue
           .slice(0, 4)
           .reverse()
@@ -154,6 +166,7 @@ function Flashcards() {
               </div>
             )
           })}
+        </div>
       </div>
       
       <CreateFlashCardModal isOpen={isOpen} setIsOpen={setIsOpen} flashcards={flashcards} setFlashcards={setFlashcards} />

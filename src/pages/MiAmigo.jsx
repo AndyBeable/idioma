@@ -68,7 +68,7 @@ function MiAmigo() {
         Back to Home
       </Button>
       <div className="flex flex-col h-screen items-center px-4 py-6">
-        <h1 className="text-white text-3xl font-bold mb-2">Mi Amigo</h1>
+        <h1 className="text-white text-2xl font-bold mb-2">Mi Amigo</h1>
         <p className="text-white text-lg mb-6">
           Learn languages with your friend
         </p>
