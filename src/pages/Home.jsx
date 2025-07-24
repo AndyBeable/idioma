@@ -1,6 +1,6 @@
 import Tile from '../components/Tile'
 import { motion } from 'framer-motion'
-import aiChat from '../assets/aiChat.png'
+import ai from '../assets/ai.png'
 import flashcards from '../assets/flashcards.png'
 
 function Home() {
@@ -19,7 +19,7 @@ function Home() {
       <Tile to="/mi-amigo">
         <h1 className="text-2xl font-bold">Learn with AI</h1>
         <p className="text-lg mb-4">Learn languages with AI</p>
-        <img src={aiChat} alt="Learn with Flashcards" className='w-[350px]'/>
+        <img src={ai} alt="Learn with Flashcards" className='w-[350px]'/>
       </Tile>
       </div>
     </motion.div>
