@@ -1,97 +1,131 @@
-import Flashcard from '../components/Flashcard'
 import Button from '../components/Button'
+import Flashcard from '../components/Flashcard'
 import CreateFlashCardModal from '../components/CreateFlashCardModal'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { fetchFlashcards } from '../services/contentful'
 
 const defaultFlashcards = [
   {
     id: 1,
-    question: 'How do you say Dog in Spanish?',
-    answer: 'Perro',
-    colorClass: 'bg-sky-600',
+    question: "¿Cómo estás?",
+    answer: "How are you?",
+    colorClass: "bg-sky-600",
   },
   {
     id: 2,
-    question: 'How do you say Cat in Spanish?',
-    answer: 'Gato',
-    colorClass: 'bg-orange-100',
+    question: "¿Cuál es tu nombre?",
+    answer: "What is your name?",
+    colorClass: "bg-orange-100",
   },
   {
     id: 3,
-    question: 'How do you say Bird in Spanish?',
-    answer: 'Pájaro',
-    colorClass: 'bg-green-600',
+    question: "¿De dónde eres?",
+    answer: "Where are you from?",
+    colorClass: "bg-green-600",
   },
   {
     id: 4,
-    question: 'How do you say Apple in Spanish?',
-    answer: 'Manzana',
-    colorClass: 'bg-orange-100',
-  },
-  {
-    id: 5,
-    question: 'How do you say Hello in Spanish?',
-    answer: 'Hola',
-    colorClass: 'bg-rose-600',
-  },
-  {
-    id: 6,
-    question: 'How do you say How are you in Spanish?',
-    answer: '¿Cómo estás?',
-    colorClass: 'bg-orange-500',
-  },
-  {
-    id: 7,
-    question: 'How do you say How old are you in Spanish?',
-    answer: '¿Cuántos años tienes?',
-    colorClass: 'bg-red-300',
-  },
-  {
-    id: 8,
-    question: 'How do you say Goodbye in Spanish?',
-    answer: 'Adiós',
-    colorClass: 'bg-amber-400',
-  },
+    question: "¿Cuántos años tienes?",
+    answer: "How old are you?",
+    colorClass: "bg-red-600",
+  }
 ]
 
 function Flashcards() {
-  // Load flashcards from localStorage or use defaults
-  const loadFlashcards = () => {
+  // Load flashcards from Contentful or localStorage
+  const loadFlashcards = async () => {
+    try {
+      // Try to fetch from Contentful first
+      const contentfulCards = await fetchFlashcards()
+      if (contentfulCards && contentfulCards.length > 0) {
+        return contentfulCards
+      }
+    } catch (error) {
+      console.log('Contentful fetch failed, using localStorage fallback:', error)
+    }
+    
+    // Fallback to localStorage or defaults
     const saved = localStorage.getItem('flashcards')
     return saved ? JSON.parse(saved) : defaultFlashcards
   }
 
-  const [flashcards, setFlashcards] = useState(loadFlashcards)
-  const [cardQueue, setCardQueue] = useState(loadFlashcards)
-  const [isAnswerVisible, setIsAnswerVisible] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
+  const [flashcards, setFlashcards] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
   const [studyMode, setStudyMode] = useState('reveal')
+  const [isAnswerVisible, setIsAnswerVisible] = useState(false)
+  const [cardQueue, setCardQueue] = useState([])
   const [currentCardNumber, setCurrentCardNumber] = useState(1)
+  const [isOpen, setIsOpen] = useState(false)
 
-  const currentIndex = currentCardNumber
+  // Load flashcards on component mount
+  useEffect(() => {
+    const loadData = async () => {
+      setIsLoading(true)
+      try {
+        const loadedCards = await loadFlashcards()
+        setFlashcards(loadedCards)
+        setCardQueue([...loadedCards])
+      } catch (error) {
+        console.error('Error loading flashcards:', error)
+        // Fallback to defaults
+        setFlashcards(defaultFlashcards)
+        setCardQueue([...defaultFlashcards])
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    
+    loadData()
+  }, [])
 
   // Save flashcards to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem('flashcards', JSON.stringify(flashcards))
+    if (flashcards.length > 0) {
+      localStorage.setItem('flashcards', JSON.stringify(flashcards))
+      setCardQueue([...flashcards])
+    }
   }, [flashcards])
 
+  // Reset current card number when queue changes
   useEffect(() => {
-    setCardQueue([...flashcards])
-  }, [flashcards])
+    setCurrentCardNumber(1)
+  }, [cardQueue.length])
   
   function handleNext() {
     setIsAnswerVisible(false)
-    setCurrentCardNumber(prev => prev + 1)
+    
+    // If we only have one card, just reset the count
+    if (cardQueue.length <= 1) {
+      setCurrentCardNumber(1)
+      return
+    }
+    
+    // For multiple cards, increment count and shuffle queue
+    setCurrentCardNumber(prev => {
+      if (prev >= cardQueue.length) {
+        return 1 // Reset to first card
+      }
+      return prev + 1
+    })
+    
     setCardQueue((prevQueue) => {
+      // Move the first card to the end
       const [first, ...rest] = prevQueue
       return [...rest, first]
     })
   }
 
+  // Calculate current index based on actual position in queue
+  const currentIndex = Math.min(currentCardNumber, cardQueue.length)
 
-  
-
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-white text-xl">Loading flashcards...</div>
+      </div>
+    )
+  }
 
   return (
     <motion.div 

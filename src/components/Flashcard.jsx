@@ -79,11 +79,11 @@ function Flashcard({
         className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors border-b-2 border-transparent hover:border-yellow-500 font-bold"
         onClick={
           isAnswerVisible
-            ? handleNext
+            ? (totalCards > 1 ? handleNext : () => setIsAnswerVisible(false))
             : () => setIsAnswerVisible(true)
         }
       >
-        {isAnswerVisible ? 'Next' : 'Reveal'}
+        {isAnswerVisible ? (totalCards > 1 ? 'Next' : 'Hide') : 'Reveal'}
       </button>
     )
   )}
