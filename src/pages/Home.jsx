@@ -6,7 +6,13 @@ import flashcards from '../assets/flashcards.png'
 
 function Home() {
   return (
-    <motion.div className="" inital={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} transition={{duration: 0.3}}>
+    <motion.div 
+      className="" 
+      initial={{ x: 300, opacity: 0 }} 
+      animate={{ x: 0, opacity: 1 }} 
+      exit={{ x: -300, opacity: 0 }} 
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+    >
       <h1 className="text-center text-4xl font-bold text-white mt-4 mb-2">IDIOMA</h1>
       <p className="text-center text-white text-lg mb-8">Your personal language learning companion
       </p>

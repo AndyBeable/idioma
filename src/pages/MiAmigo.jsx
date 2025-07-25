@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import Button from "../components/Button";
 import askQuestion from "../services/chat";
+import { motion } from 'framer-motion';
 
 const initialMessages = [
   {
@@ -60,7 +61,12 @@ function MiAmigo() {
   
 
   return (
-    <>
+    <motion.div
+      initial={{ x: 300, opacity: 0 }} 
+      animate={{ x: 0, opacity: 1 }} 
+      exit={{ x: -300, opacity: 0 }} 
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+    >
       <Button
         className="absolute top-10 left-10 bg-gray-700 hover:bg-gray-800 hover:border-b-2 hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors"
         to="/"
@@ -138,7 +144,7 @@ function MiAmigo() {
           </button>
         </div>
       </div>
-    </>
+    </motion.div>
   );
 }
 
