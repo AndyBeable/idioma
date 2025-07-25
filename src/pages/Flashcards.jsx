@@ -96,9 +96,9 @@ function Flashcards() {
     <div className="relative flex flex-col h-screen">
       {/* Header */}
       <div className="flex items-center justify-between p-6">
-        <Button className="bg-gray-700 hover:bg-gray-800 hover:border-b-2 hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" to="/">Back to Home</Button>
+        <Button className="bg-gray-700 hover:bg-gray-800 border-b-2 border-transparent hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" to="/">Back to Home</Button>
         <h1 className="text-white text-2xl font-bold">Test your knowledge</h1>
-        <Button className="bg-gray-700 hover:bg-gray-800 hover:border-b-2 hover:border-r-2 hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" onClick={() => setIsOpen(true)}>Add Flashcard</Button>
+        <Button className="bg-gray-700 hover:bg-gray-800 border-b-2 border-transparent hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" onClick={() => setIsOpen(true)}>Add Flashcard</Button>
       </div>
       
       {/* Description */}

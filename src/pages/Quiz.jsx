@@ -44,6 +44,8 @@ function Quiz() {
   const [isCorrect, setIsCorrect] = useState(null)
   const [lastQuestion, setLastQuestion] = useState(false)
   const [score, setScore] = useState(0)
+  const [userAnswer, setUserAnswer] = useState('')
+  const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false)
 
   const handleAnswerClick = (selectedAnswer) => {
     if(selectedAnswer === currentQuestion.correctAnswer) {
@@ -71,10 +73,12 @@ function Quiz() {
 
   const handleNextQuestion = () => {
     if(currentQuestionIndex === quizQuestions.length -1) return setLastQuestion(true)
-   setCurrentQuestionIndex(currentQuestionIndex + 1)
-   setShowFeedback(false)
-   setIsCorrect(null)
-   setSelectedAnswer(null)
+    setCurrentQuestionIndex(currentQuestionIndex + 1)
+    setShowFeedback(false)
+    setIsCorrect(null)
+    setSelectedAnswer(null)
+    setUserAnswer('')
+    setIsAnswerSubmitted(false)
   }
   
 
@@ -87,15 +91,28 @@ function Quiz() {
     setLastQuestion(false)
   }
 
+  const handleFillInSubmit = () => {
+    if(userAnswer.trim() === '') return
+
+    const correct = userAnswer.toLowerCase() === currentQuestion.correctAnswer.toLowerCase()
+    setIsCorrect(correct)
+    if(correct) {
+      setScore(score + 1)
+    }
+    setShowFeedback(true)
+    setIsAnswerSubmitted(true)
+    setUserAnswer('')
+  }
+
 
   
   return (
     <div className="relative flex flex-col h-screen">
       {/* Header */}
       <div className="flex items-center justify-between p-6">
-        <Button className="bg-gray-700 hover:bg-gray-800 hover:border-b-2 hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" to="/">Back to Home</Button>
+        <Button className="bg-gray-700 hover:bg-gray-800 border-b-2 border-transparent hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" to="/">Back to Home</Button>
         <h1 className="text-white text-2xl font-bold">Quiz</h1>
-        <div className="w-32"></div> {/* Spacer to center the title */}
+        <div className="w-32"></div>
       </div>
       
       {/* Description */}
@@ -138,25 +155,48 @@ function Quiz() {
               <h2 className="text-2xl font-bold mb-8">{renderSentence()}</h2>
 
               {/* Answer options */}
-              <div className="flex items-center justify-center gap-4">
-                {currentQuestion.options.map((option, index) => (
-                  <button
-                    onClick={() => handleAnswerClick(option)}
-                    key={index}
-                    className={`px-4 py-2 rounded-lg transition-colors border-b-2 border-transparent font-bold ${
-                      showFeedback && selectedAnswer === option
-                        ? isCorrect 
-                          ? 'bg-green-600 text-white'
-                          : 'bg-red-600 text-white'   
-                        : showFeedback && option === currentQuestion.correctAnswer
-                          ? 'bg-green-600 text-white' 
-                          : 'bg-gray-900 text-white hover:bg-gray-800 hover:border-yellow-500'
-                    }`} 
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
+              {studyMode === 'multi' ? (
+                <div className="flex items-center justify-center gap-4">
+                  {currentQuestion.options.map((option, index) => (
+                    <button
+                      onClick={() => handleAnswerClick(option)}
+                      key={index}
+                      className={`px-4 py-2 rounded-lg transition-colors border-b-2 border-transparent font-bold ${
+                        showFeedback && selectedAnswer === option
+                          ? isCorrect 
+                            ? 'bg-green-600 text-white'
+                            : 'bg-red-600 text-white'   
+                          : showFeedback && option === currentQuestion.correctAnswer
+                            ? 'bg-green-600 text-white' 
+                            : 'bg-gray-900 text-white hover:bg-gray-800 hover:border-yellow-500'
+                      }`} 
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center gap-4">
+                  <input
+                    type="text"
+                    value={userAnswer}
+                    onChange={(e) => setUserAnswer(e.target.value)}
+                    placeholder="Type your answer here..."
+                    className="bg-transparent text-black text-lg border-b-2 border-black/50 pb-1 outline-none placeholder:text-black/50 focus:border-black"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleFillInSubmit()
+                      }
+                    }}
+                    autoFocus
+                  />
+                  {isAnswerSubmitted && (
+                    <p className={`text-lg font-bold ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
+                      {isCorrect ? '✅ Correct!' : '❌ Incorrect'}
+                    </p>
+                  )}
+                </div>
+              )}
               {/* Next button */}
               <div className="flex items-center justify-center h-12">
                 {showFeedback && (
@@ -169,7 +209,7 @@ function Quiz() {
           ) : (
             // Show only the score and restart button
             <div className="flex flex-col items-center justify-center">
-              <span className="text-black text-3xl font-bold mb-4">You scored {score}/{quizQuestions.length}</span>
+              <span className="text-black text-3xl font-bold mb-4">You scored:<span> {score}/{quizQuestions.length}</span></span>
               <button onClick={handleRestartQuiz} className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors border-b-2 border-transparent hover:border-yellow-500 font-bold">
                 Restart Quiz
               </button>
