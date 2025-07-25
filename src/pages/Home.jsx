@@ -23,8 +23,8 @@ function Home() {
         <img src={ai} alt="Learn with Flashcards" className='w-[350px]'/>
       </Tile>
       <Tile to="/quiz">
-        <h1 className="text-2xl font-bold">Learn with Quiz</h1>
-        <p className="text-lg mb-4">Learn languages with Quiz</p>
+        <h1 className="text-2xl font-bold">Learn with a Quiz</h1>
+        <p className="text-lg mb-4">Learn languages with a Quiz</p>
         <img src={quiz} alt="Learn with Flashcards" className='w-[350px]'/>
       </Tile>
       </div>
