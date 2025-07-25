@@ -95,10 +95,10 @@ function Flashcards() {
   return (
     <div className="relative flex flex-col h-screen">
       {/* Header */}
-      <div className="flex items-center justify-between p-6">
-        <Button className="bg-gray-700 hover:bg-gray-800 border-b-2 border-transparent hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" to="/">Back to Home</Button>
-        <h1 className="text-white text-2xl font-bold">Test your knowledge</h1>
-        <Button className="bg-gray-700 hover:bg-gray-800 border-b-2 border-transparent hover:border-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition-colors" onClick={() => setIsOpen(true)}>Add Flashcard</Button>
+      <div className="flex items-center justify-between p-4 lg:p-6">
+        <Button className="bg-gray-700 hover:bg-gray-800 border-b-2 border-transparent hover:border-yellow-500 text-white font-bold py-2 px-3 lg:py-3 lg:px-6 rounded-lg transition-colors text-sm lg:text-base" to="/">Back to Home</Button>
+        <h1 className="text-white text-xl lg:text-2xl font-bold">Test your knowledge</h1>
+        <Button className="bg-gray-700 hover:bg-gray-800 border-b-2 border-transparent hover:border-yellow-500 text-white font-bold py-2 px-3 lg:py-3 lg:px-6 rounded-lg transition-colors text-sm lg:text-base" onClick={() => setIsOpen(true)}>Add Flashcard</Button>
       </div>
       
       {/* Description */}
@@ -107,7 +107,7 @@ function Flashcards() {
       </div>
       
       {/* Mode Selector */}
-      <div className="flex justify-center mb-8">
+      <div className="flex justify-center mb-4">
         <div className="flex bg-gray-700 rounded-lg p-1">
           <button
             onClick={() => setStudyMode('reveal')}
