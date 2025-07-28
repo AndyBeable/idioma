@@ -76,7 +76,7 @@ function MiAmigo() {
       <div className="flex flex-col h-screen items-center px-4 py-6">
         <h1 className="text-white text-2xl font-bold mb-2">Mi Amigo</h1>
         <p className="text-white text-lg mb-6">
-          Learn languages with your friend
+          Learn Spanish with your friend
         </p>
 
         <div className="flex-grow overflow-y-auto border-2 border-yellow-500 rounded-md p-4 w-full max-w-[500px] mb-4 bg-white/5 text-white relative">

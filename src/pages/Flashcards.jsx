@@ -131,7 +131,7 @@ function Flashcards() {
       </div>
       
       <div className="text-center mb-8">
-        <p className="text-white text-lg">Learn languages and test yourself with flashcards</p>
+        <p className="text-white text-lg">Learn Spanish and test yourself with flashcards</p>
       </div>
       
       <div className="flex justify-center mb-4">
