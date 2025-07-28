@@ -41,9 +41,7 @@ function Flashcard({
       )}
       <div className="flex items-center justify-center">
   {studyMode === 'type' ? (
-    // Type mode
     showFeedback ? (
-      // Show feedback
       <div className="text-center">
         <p className={`text-lg font-bold mb-2 ${isCorrect ? 'text-green-300' : 'text-red-300'}`}>
           {isCorrect ? '✅ Correct!' : '❌ Incorrect'}
@@ -57,7 +55,6 @@ function Flashcard({
         </button>
       </div>
     ) : (
-      // Show input
       <input 
         type="text" 
         value={userAnswer} 
@@ -73,7 +70,6 @@ function Flashcard({
       />
     )
   ) : (
-    // Reveal mode
     isInteractive && (
       <button
         className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors border-b-2 border-transparent hover:border-yellow-500 font-bold"

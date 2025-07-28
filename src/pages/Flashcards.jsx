@@ -33,10 +33,8 @@ const defaultFlashcards = [
 ]
 
 function Flashcards() {
-  // Load flashcards from Contentful or localStorage
   const loadFlashcards = async () => {
     try {
-      // Try to fetch from Contentful first
       const contentfulCards = await fetchFlashcards()
       if (contentfulCards && contentfulCards.length > 0) {
         return contentfulCards
@@ -45,7 +43,6 @@ function Flashcards() {
       console.log('Contentful fetch failed, using localStorage fallback:', error)
     }
     
-    // Fallback to localStorage or defaults
     const saved = localStorage.getItem('flashcards')
     return saved ? JSON.parse(saved) : defaultFlashcards
   }
@@ -58,7 +55,6 @@ function Flashcards() {
   const [currentCardNumber, setCurrentCardNumber] = useState(1)
   const [isOpen, setIsOpen] = useState(false)
 
-  // Load flashcards on component mount
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true)
@@ -68,7 +64,6 @@ function Flashcards() {
         setCardQueue([...loadedCards])
       } catch (error) {
         console.error('Error loading flashcards:', error)
-        // Fallback to defaults
         setFlashcards(defaultFlashcards)
         setCardQueue([...defaultFlashcards])
       } finally {
@@ -79,7 +74,6 @@ function Flashcards() {
     loadData()
   }, [])
 
-  // Save flashcards to localStorage whenever they change
   useEffect(() => {
     if (flashcards.length > 0) {
       localStorage.setItem('flashcards', JSON.stringify(flashcards))
@@ -87,7 +81,6 @@ function Flashcards() {
     }
   }, [flashcards])
 
-  // Reset current card number when queue changes
   useEffect(() => {
     setCurrentCardNumber(1)
   }, [cardQueue.length])
@@ -95,28 +88,24 @@ function Flashcards() {
   function handleNext() {
     setIsAnswerVisible(false)
     
-    // If we only have one card, just reset the count
     if (cardQueue.length <= 1) {
       setCurrentCardNumber(1)
       return
     }
     
-    // For multiple cards, increment count and shuffle queue
     setCurrentCardNumber(prev => {
       if (prev >= cardQueue.length) {
-        return 1 // Reset to first card
+        return 1
       }
       return prev + 1
     })
     
     setCardQueue((prevQueue) => {
-      // Move the first card to the end
       const [first, ...rest] = prevQueue
       return [...rest, first]
     })
   }
 
-  // Calculate current index based on actual position in queue
   const currentIndex = Math.min(currentCardNumber, cardQueue.length)
 
   if (isLoading) {
@@ -134,20 +123,17 @@ function Flashcards() {
       animate={{ x: 0, opacity: 1 }} 
       exit={{ x: -300, opacity: 0 }} 
       transition={{ duration: 0.3, ease: "easeInOut" }}
-    >
-      {/* Header */}
+    >   
       <div className="flex items-center justify-between p-4 lg:p-6">
         <Button className="bg-gray-700 hover:bg-gray-800 border-b-2 border-transparent hover:border-yellow-500 text-white font-bold py-2 px-3 lg:py-3 lg:px-6 rounded-lg transition-colors text-sm lg:text-base" to="/">Back to Home</Button>
         <h1 className="text-white text-xl lg:text-2xl font-bold">Test your knowledge</h1>
         <Button className="bg-gray-700 hover:bg-gray-800 border-b-2 border-transparent hover:border-yellow-500 text-white font-bold py-2 px-3 lg:py-3 lg:px-6 rounded-lg transition-colors text-sm lg:text-base" onClick={() => setIsOpen(true)}>Add Flashcard</Button>
       </div>
       
-      {/* Description */}
       <div className="text-center mb-8">
         <p className="text-white text-lg">Learn languages and test yourself with flashcards</p>
       </div>
       
-      {/* Mode Selector */}
       <div className="flex justify-center mb-4">
         <div className="flex bg-gray-700 rounded-lg p-1">
           <button
@@ -173,7 +159,6 @@ function Flashcards() {
         </div>
       </div>
       
-      {/* Flashcards */}
       <div className="flex-1 flex items-center justify-center">
         <div className="relative w-[400px] h-[300px] lg:w-[600px] lg:h-[400px]">
         {cardQueue

@@ -95,19 +95,17 @@ function Quiz() {
       exit={{ x: -300, opacity: 0 }} 
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
-      {/* Header */}
+
       <div className="flex items-center justify-between p-4 lg:p-6">
         <Button className="bg-gray-700 hover:bg-gray-800 border-b-2 border-transparent hover:border-yellow-500 text-white font-bold py-2 px-3 lg:py-3 lg:px-6 rounded-lg transition-colors text-sm lg:text-base" to="/">Back to Home</Button>
         <h1 className="text-white text-xl lg:text-2xl font-bold">Quiz</h1>
-        <div className="w-16 lg:w-32"></div> {/* Spacer to center the title */}
+        <div className="w-16 lg:w-32"></div> 
       </div>
       
-      {/* Description */}
       <div className="text-center mb-8">
         <p className="text-white text-lg">Test your knowledge with quizzes</p>
       </div>
       
-      {/* Mode Selector */}
       <div className="flex justify-center mb-4">
         <div className="flex bg-gray-700 rounded-lg p-1">
           <button
@@ -133,9 +131,14 @@ function Quiz() {
         </div>
       </div>
       
-      {/* Quiz content */}
       <div className="flex-1 flex items-center justify-center">
-        <div className={`flex flex-col items-center justify-center w-[400px] h-[300px] lg:w-[600px] lg:h-[400px] rounded-lg p-4 shadow-xl text-black bg-orange-100 text-black`}>
+        <div className={`flex flex-col items-center justify-center w-[400px] h-[300px] lg:w-[600px] lg:h-[400px] rounded-lg p-4 shadow-xl text-black bg-orange-100 text-black relative`}>
+          {!lastQuestion && (
+            <div className="absolute top-4 right-4 z-10 text-black">
+              {currentQuestionIndex + 1} / {quizQuestions.length}
+            </div>
+          )}
+          
           {!lastQuestion ? (
             <>
               <QuizItem
@@ -147,7 +150,6 @@ function Quiz() {
                 studyMode={studyMode}
               />
               
-              {/* Next button */}
               <div className="flex items-center justify-center h-12">
                 {showFeedback && (
                   <button onClick={handleNextQuestion} className="mt-4 bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors border-b-2 border-transparent hover:border-yellow-500 font-bold">
@@ -157,7 +159,6 @@ function Quiz() {
               </div>
             </>
           ) : (
-            // Show only the score and restart button
             <div className="flex flex-col items-center justify-center">
               <span className="text-black text-3xl font-bold mb-4">You scored:<span> {score}/{quizQuestions.length}</span></span>
               <button onClick={handleRestartQuiz} className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors border-b-2 border-transparent hover:border-yellow-500 font-bold">
