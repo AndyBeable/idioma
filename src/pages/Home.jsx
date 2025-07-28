@@ -22,18 +22,18 @@ function Home() {
 
         <Tile to="/flashcards">
           <h1 className="text-2xl font-bold">Learn with Flashcards</h1>
-          <p className="text-lg mb-4">Learn languages with flashcards</p>
+          <p className="text-lg mb-4">Learn Spanish with flashcards</p>
           <img src={flashcards} alt="Learn with Flashcards" className='w-[350px]'/>
           
         </Tile>
         <Tile to="/mi-amigo">
           <h1 className="text-2xl font-bold">Learn with AI</h1>
-          <p className="text-lg mb-4">Learn languages with AI</p>
+          <p className="text-lg mb-4">Learn Spanish with AI</p>
           <img src={ai} alt="Learn with Flashcards" className='w-[350px]'/>
         </Tile>
         <Tile to="/quiz">
           <h1 className="text-2xl font-bold">Learn with a Quiz</h1>
-          <p className="text-lg mb-4">Learn languages with a Quiz</p>
+          <p className="text-lg mb-4">Learn Spanish with a Quiz</p>
           <img src={quiz} alt="Learn with Flashcards" className='w-[350px]'/>
         </Tile>
         </div>
